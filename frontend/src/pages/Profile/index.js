@@ -14,15 +14,32 @@ function Profile() {
     // useEffect serve para disparar uma função em um determinado momento, exemplo: Quando o elemento é mostrado em tela
     // esse array é um array de dependências ou seja toda vez que os elemtnos dele mudarem a função será executada de novo
     // então se deixar esse array vazio ele vai executar uma única vez, ou nesse caso colocar um ongId para ficar mais correto
-    useEffect(() => {
-        api.get('profile', {
-            headers: {
-                Autorization: ongId,
+    /* useEffect(() => {
+        async function fetchProfile() {
+            try {
+                const response = await api.get('profile', {
+                    headers:
+                        { Autorization: ongId, }
+                })
+                setIncidents(response.data)
+                console.log(useState)
+            } catch (err) {
+                alert('Putz')
             }
-        }).then(response => {
-            setIncidents(response.data) 
-        })
+        }
+        fetchProfile()
+    }, [ongId]) */
+
+    useEffect(() => {
+        async function fetchProfile() {
+            const response = await api.get('profile', { 
+                headers: { Autorization: ongId, }})
+            setIncidents(response.data)
+            console.log(useState)
+        }
+        fetchProfile()
     }, [ongId])
+
     return (
         <div className="profile-container">
             <header>
